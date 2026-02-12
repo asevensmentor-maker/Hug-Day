@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Your Hug 🤗</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<style>
+body{
+  margin:0;
+  height:100vh;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  font-family:'Segoe UI',sans-serif;
+  background:linear-gradient(135deg,#fbc2eb,#a6c1ee);
+  overflow:hidden;
+}
+
+.container{
+  background:rgba(255,255,255,0.25);
+  backdrop-filter:blur(12px);
+  padding:30px;
+  border-radius:25px;
+  text-align:center;
+  width:90%;
+  max-width:430px;
+  box-shadow:0 25px 50px rgba(0,0,0,0.3);
+}
+
+h1,p{color:#fff;}
+
+.hug-animation{
+  font-size:60px;
+  animation:hug 1.5s infinite;
+}
+
+@keyframes hug{
+  0%{transform:scale(1);}
+  50%{transform:scale(1.2);}
+  100%{transform:scale(1);}
+}
+
+.hug-bar{
+  width:100%;
+  height:18px;
+  background:rgba(255,255,255,0.4);
+  border-radius:20px;
+  overflow:hidden;
+  margin:10px 0;
+}
+
+#hugFill{
+  height:100%;
+  width:0%;
+  background:linear-gradient(90deg,#ff4081,#ff80ab);
+  transition:.4s;
+}
+
+button{
+  padding:12px 25px;
+  border:none;
+  border-radius:30px;
+  font-size:18px;
+  background:#fff;
+  color:#ff4081;
+  cursor:pointer;
+}
+
+#gameArea{
+  position:relative;
+  height:180px;
+  background:rgba(255,255,255,0.3);
+  border-radius:15px;
+  margin-top:15px;
+  overflow:hidden;
+}
+
+.hug{
+  position:absolute;
+  font-size:28px;
+  cursor:pointer;
+  animation:fall 3s linear forwards;
+}
+
+@keyframes fall{
+  from{top:-40px;}
+  to{top:180px;}
+}
+</style>
+</head>
+
+<body>
+<div class="container">
+  <h1>Here’s Your Hug 🤗❤️</h1>
+  <p>Every tap is a hug from me to you 💞</p>
+
+  <div class="hug-animation">🧍‍♂️🤗🧍‍♀️</div>
+
+  <!-- HUG METER GAME -->
+  <p id="hugText">Tap to feel the hug 🤍</p>
+  <div class="hug-bar"><div id="hugFill"></div></div>
+  <button onclick="hug()">Send Hug 🧸</button>
+
+  <hr style="margin:20px 0;border-color:rgba(255,255,255,0.5);">
+
+  <!-- CATCH THE HUGS GAME -->
+  <h3 style="color:#fff;">Catch the Hugs 🤗</h3>
+  <p id="scoreText">Hugs Collected: 0 / 10</p>
+  <div id="gameArea"></div>
+
+  <p id="finalText"></p>
+</div>
+
+<script>
+/* Hug Meter */
+let level=0;
+const fill=document.getElementById("hugFill");
+const hugText=document.getElementById("hugText");
+const finalText=document.getElementById("finalText");
+
+const hugMsgs=[
+  "That felt warm 🤍",
+  "Hold me 🥹",
+  "So cozy 🤗",
+  "Heart is full 💖",
+  "Never let go 🧸❤️"
+];
+
+function hug(){
+  if(level<100){
+    level+=20;
+    fill.style.width=level+"%";
+    hugText.innerText=hugMsgs[level/20-1];
+    if(level===100){
+      finalText.innerHTML="<br><b>I wish I could hug you forever ❤️</b>";
+    }
+  }
+}
+
+/* Catch the Hugs Game */
+let score=0;
+const scoreText=document.getElementById("scoreText");
+const gameArea=document.getElementById("gameArea");
+
+function createHug(){
+  const h=document.createElement("div");
+  h.className="hug";
+  h.innerText="🤗";
+  h.style.left=Math.random()*90+"%";
+  gameArea.appendChild(h);
+
+  h.onclick=()=>{
+    score++;
+    scoreText.innerText=`Hugs Collected: ${score} / 10`;
+    h.remove();
+    if(score===10){
+      gameArea.innerHTML="<h3 style='color:#fff;padding-top:60px;'>You’re wrapped in my hugs 🤍</h3>";
+    }
+  };
+
+  setTimeout(()=>h.remove(),3000);
+}
+setInterval(createHug,900);
+</script>
+</body>
+</html>

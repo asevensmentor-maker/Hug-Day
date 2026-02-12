@@ -2,301 +2,103 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<title>Happy Hug Day ❤️</title>
+<title>Happy Hug Day 🤗</title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 <style>
-body {
-  margin: 0;
-  height: 100vh;
-  font-family: 'Segoe UI', sans-serif;
-  background: linear-gradient(135deg, #ffb6c1, #ff69b4);
-  overflow: hidden;
-  display: flex;
-  justify-content: center;
-  align-items: center;
+body{
+  margin:0;
+  height:100vh;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  font-family:'Segoe UI',sans-serif;
+  background:linear-gradient(135deg,#ff9a9e,#fad0c4);
 }
 
-.container {
-  background: rgba(255,255,255,0.18);
-  backdrop-filter: blur(12px);
-  border-radius: 25px;
-  padding: 30px;
-  text-align: center;
-  width: 90%;
-  max-width: 420px;
-  box-shadow: 0 25px 50px rgba(0,0,0,0.25);
-  position: relative;
+.container{
+  background:rgba(255,255,255,0.25);
+  backdrop-filter:blur(10px);
+  padding:30px;
+  border-radius:25px;
+  text-align:center;
+  width:90%;
+  max-width:420px;
+  box-shadow:0 20px 40px rgba(0,0,0,0.25);
+  position:relative;
 }
 
-h1 {
-  color: #fff;
-  font-size: 32px;
+h1,p{color:#fff;}
+
+button{
+  padding:12px 25px;
+  border:none;
+  border-radius:30px;
+  font-size:18px;
+  cursor:pointer;
+  transition:.3s;
 }
 
-p {
-  color: #fff;
-  font-size: 18px;
-  line-height: 1.6;
+#yesBtn{
+  background:#ff4081;
+  color:#fff;
 }
 
-#reactionText {
-  font-size: 20px;
-  margin-top: 10px;
+#noBtn{
+  background:#fff;
+  color:#ff4081;
+  position:absolute;
 }
 
-.hug-animation {
-  font-size: 60px;
-  margin: 15px 0;
-  animation: hug 1.5s infinite ease-in-out;
-}
-
-@keyframes hug {
-  0% { transform: scale(1); }
-  50% { transform: scale(1.15); }
-  100% { transform: scale(1); }
-}
-
-.buttons {
-  margin-top: 20px;
-}
-
-button {
-  padding: 12px 25px;
-  font-size: 18px;
-  border-radius: 30px;
-  border: none;
-  cursor: pointer;
-  transition: 0.3s;
-}
-
-#yesBtn {
-  background: #ff4081;
-  color: white;
-  box-shadow: 0 5px 15px rgba(255,64,129,0.5);
-}
-
-#noBtn {
-  background: white;
-  color: #ff4081;
-  margin-left: 15px;
-  position: absolute;
-}
-
-.hug-game {
-  margin-top: 25px;
-}
-
-.hug-bar {
-  width: 100%;
-  height: 18px;
-  background: rgba(255,255,255,0.3);
-  border-radius: 20px;
-  overflow: hidden;
-  margin: 10px 0;
-}
-
-#hugFill {
-  height: 100%;
-  width: 0%;
-  background: linear-gradient(90deg, #ff4081, #ff80ab);
-  transition: width 0.4s ease;
-}
-
-#hugBtn {
-  background: #fff;
-  color: #ff4081;
-  margin-top: 8px;
-}
-
-.popup {
-  position: fixed;
-  top: 0;
-  left: 0;
-  height: 100vh;
-  width: 100vw;
-  background: rgba(0,0,0,0.6);
-  display: none;
-  justify-content: center;
-  align-items: center;
-}
-
-.popup-content {
-  background: #fff;
-  border-radius: 20px;
-  padding: 25px;
-  text-align: center;
-  width: 80%;
-  max-width: 350px;
-  animation: pop 0.5s ease;
-}
-
-@keyframes pop {
-  from { transform: scale(0.5); opacity: 0; }
-  to { transform: scale(1); opacity: 1; }
-}
-
-.popup-content h2 {
-  color: #ff4081;
-}
-
-.popup-content p {
-  color: #444;
-}
-
-.heart {
-  position: absolute;
-  color: red;
-  font-size: 20px;
-  animation: float 6s linear infinite;
-}
-
-@keyframes float {
-  from {
-    transform: translateY(100vh) scale(0.5);
-    opacity: 1;
-  }
-  to {
-    transform: translateY(-10vh) scale(1.2);
-    opacity: 0;
-  }
+#reaction{
+  font-size:20px;
+  margin:10px 0;
 }
 </style>
 </head>
 
 <body>
-
 <div class="container">
   <h1>Happy Hug Day 🤗❤️</h1>
-
   <p>
-    This hug is my comfort for your sad days,  
-    my smile for your happy ones,  
-    and my promise that you’re never alone 💞
+    This hug is my warmth on your cold days,  
+    my strength on your weak ones,  
+    and my love always 💞
   </p>
 
-  <p id="reactionText"></p>
+  <p id="reaction"></p>
 
-  <div class="hug-animation">🧍‍♂️🤗🧍‍♀️</div>
-
-  <div class="buttons">
-    <button id="yesBtn">Give Me a Hug 🤗</button>
-    <button id="noBtn">No 🙈</button>
-  </div>
-
-  <!-- HUG MINI GAME -->
-  <div class="hug-game">
-    <p id="hugText">Tap to send a hug 🤍</p>
-    <div class="hug-bar">
-      <div id="hugFill"></div>
-    </div>
-    <button id="hugBtn">Send a Hug 🧸</button>
-  </div>
-</div>
-
-<!-- POPUP -->
-<div class="popup" id="popup">
-  <div class="popup-content">
-    <h2>🤗 Biggest Hug Ever!</h2>
-    <p>
-      This hug is full of love, warmth,  
-      and everything I feel for you ❤️  
-      Stay here with me forever 🤍
-    </p>
-  </div>
+  <button id="yesBtn" onclick="goNext()">Give Me a Hug 🤗</button>
+  <button id="noBtn">No 🙈</button>
 </div>
 
 <script>
-const noBtn = document.getElementById("noBtn");
-const yesBtn = document.getElementById("yesBtn");
-const popup = document.getElementById("popup");
-const reactionText = document.getElementById("reactionText");
+const noBtn=document.getElementById("noBtn");
+const yesBtn=document.getElementById("yesBtn");
+const reaction=document.getElementById("reaction");
 
-let yesScale = 1;
-let noCount = 0;
-
-const reactions = [
+let scale=1, count=0;
+const texts=[
   "Are you sure? 🥺",
   "Still no? 😢",
   "Pleaseee 🥹",
   "My arms are open 🤗",
-  "Last chance 😘"
+  "You can’t escape love 😘"
 ];
 
-const yesTexts = [
-  "Give Me a Hug 🤗",
-  "Okay okay hug me 💕",
-  "Come here 🥰",
-  "I need this hug 🤍",
-  "HUG ME NOW 🤗❤️"
-];
+noBtn.addEventListener("mouseover",()=>{
+  count++;
+  noBtn.style.left=Math.random()*250+"px";
+  noBtn.style.top=Math.random()*200+"px";
 
-noBtn.addEventListener("mouseover", () => {
-  noCount++;
-
-  const x = Math.random() * (window.innerWidth - 120);
-  const y = Math.random() * (window.innerHeight - 60);
-  noBtn.style.left = x + "px";
-  noBtn.style.top = y + "px";
-
-  yesScale += 0.2;
-  yesBtn.style.transform = `scale(${yesScale})`;
-
-  reactionText.innerText = reactions[Math.min(noCount - 1, reactions.length - 1)];
-  yesBtn.innerText = yesTexts[Math.min(noCount, yesTexts.length - 1)];
-
-  if (noCount >= 5) {
-    setTimeout(() => popup.style.display = "flex", 600);
-  }
+  scale+=0.15;
+  yesBtn.style.transform=`scale(${scale})`;
+  reaction.innerText=texts[Math.min(count-1,texts.length-1)];
 });
 
-yesBtn.addEventListener("click", () => {
-  popup.style.display = "flex";
-});
-
-popup.addEventListener("click", () => {
-  popup.style.display = "none";
-});
-
-// HUG GAME
-let hugLevel = 0;
-const hugFill = document.getElementById("hugFill");
-const hugBtn = document.getElementById("hugBtn");
-const hugText = document.getElementById("hugText");
-
-const hugMessages = [
-  "That felt warm 🤍",
-  "Another hug? 🥹",
-  "So cozy 🤗",
-  "Don’t let go 💞",
-  "Tight hug 🧸❤️"
-];
-
-hugBtn.addEventListener("click", () => {
-  if (hugLevel < 100) {
-    hugLevel += 20;
-    hugFill.style.width = hugLevel + "%";
-    hugText.innerText = hugMessages[hugLevel / 20 - 1];
-
-    if (hugLevel >= 100) {
-      setTimeout(() => popup.style.display = "flex", 600);
-    }
-  }
-});
-
-// FLOATING HEARTS
-function createHeart() {
-  const heart = document.createElement("div");
-  heart.className = "heart";
-  heart.innerHTML = "❤️";
-  heart.style.left = Math.random() * 100 + "vw";
-  heart.style.fontSize = Math.random() * 20 + 15 + "px";
-  document.body.appendChild(heart);
-
-  setTimeout(() => heart.remove(), 6000);
+function goNext(){
+  window.location.href="hug.html";
 }
-setInterval(createHeart, 300);
 </script>
-
 </body>
 </html>
